@@ -1,22 +1,23 @@
 import { DatabaseSync } from 'node:sqlite'
-const db = new DatabaseSync(':memory:')
+const db = new DatabaseSync('./db.sqlite')
+
 
 // Execute SQL statements from strings
 db.exec(`
-    CREATE TABLE users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE,
-        password TEXT
+    CREATE TABLE IF NOT EXISTS users (
+        id            INTEGER   PRIMARY KEY AUTOINCREMENT ,
+        name          TEXT                                ,
+        email         TEXT      UNIQUE                    ,
+        password      TEXT                                ,
+        points        INTEGER   NOT NULL    DEFAULT 0                             
     )
 `)
 
 db.exec(`
-    CREATE TABLE todos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER,
-        task TEXT,
-        completed BOOLEAN DEFAULT 0,
-        FOREIGN KEY(user_id) REFERENCES users(id)
+    CREATE TABLE IF NOT EXISTS qr_codes (
+        id            INTEGER   PRIMARY KEY AUTOINCREMENT ,
+        text          TEXT                                ,
+        enabled       BOOLEAN   NOT NULL    DEFAULT 1
     )    
 `)
 

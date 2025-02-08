@@ -1,0 +1,31 @@
+### Register
+POST http://localhost:8000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Mustafa",
+  "email": "mustafa.3@gmail.com",
+  "password": "mustafaCannotChoosePasswords"
+}
+
+
+
+### Login
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "mustafa.3@gmail.com",
+  "password": "mustafaCannotChoosePasswords"
+}
+
+
+
+### Send QR Code
+POST http://localhost:8000/api/dashboard/sendQr
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczOTA0MjIxMywiZXhwIjoxNzM5MDQ1ODEzfQ.mF7CHLxLgGBGjF0fKU4oslo6U8WaljkyxES7-pLMtW8
+Content-Type: application/json
+
+{
+  "text": "qpbkfbfbvbjyjgspwbwd"
+}
