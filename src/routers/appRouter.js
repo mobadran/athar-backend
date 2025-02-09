@@ -20,10 +20,14 @@ function updateQrCodes() {
   }
 }
 
+router.get('/points', (req, res) => {
+  res.status(200).json({ points: db.prepare(`SELECT points FROM users WHERE id = ?`).get(req.user.userId).points })
+})
+
 router.post('/sendQr', (req, res) => {
   const qrCodes = db.prepare(`SELECT text, id FROM qr_codes WHERE enabled = 1`).all()
 
-  console.log(qrCodes)
+  // console.log(qrCodes)
 
   if (qrCodes[0].text === req.body.text) {
     // Add points

@@ -3,9 +3,9 @@ POST http://localhost:8000/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "Mustafa",
-  "email": "mustafa.3@gmail.com",
-  "password": "mustafaCannotChoosePasswords"
+  "name": "Badraan",
+  "email": "Badraan@gmail.com",
+  "password": "BadraanSuii"
 }
 
 
@@ -15,8 +15,8 @@ POST http://localhost:8000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "mustafa.3@gmail.com",
-  "password": "mustafaCannotChoosePasswords"
+  "email": "Badraan@gmail.com",
+  "password": "BadraanSuii"
 }
 
 
@@ -29,3 +29,10 @@ Content-Type: application/json
 {
   "text": "qpbkfbfbvbjyjgspwbwd"
 }
+
+
+
+### Get Points
+GET http://localhost:8000/api/dashboard/points
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTczOTEzMjE0OCwiZXhwIjoxNzM5MTM1NzQ4fQ.dTS598TvYOaYrIW7iFmqrwBfLB8wXjGcuoTGRIetrsM
+Content-Type: application/json
