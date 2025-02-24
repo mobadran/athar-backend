@@ -20,4 +20,13 @@ db.exec(`
     )
 `)
 
+// db.exec(`
+//     CREATE TABLE IF NOT EXISTS points (
+//         id            INTEGER   PRIMARY KEY AUTOINCREMENT ,
+//         user_id       INTEGER   NOT NULL                    ,
+//         points        INTEGER   NOT NULL    DEFAULT 0
+//     )    
+// `)
+
+
 export default db
