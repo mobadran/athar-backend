@@ -1,0 +1,101 @@
+{
+  "info": {
+    "_postman_id": "0c085c55-a337-4f92-94f9-7f70fc0e444e",
+    "name": "Athar",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": ""
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/api/auth/register",
+              "path": ["api", "auth", "register"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"name\": \"Badraanss\",\n  \"email\": \"badraansss@gmail.com\",\n  \"phone\": \"011144801552ss\",\n  \"password\": \"mypwd\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/api/auth/login",
+              "path": ["api", "auth", "login"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"phone\": \"01114480155\",\n  \"password\": \"mypwd\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Access Token",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8000/api/auth/accessToken",
+              "path": ["api", "auth", "accessToken"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            },
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2JjYzY5NTI5YjgyYzk2MzM5MzZiMjMiLCJpYXQiOjE3NDA2ODA4NzMsImV4cCI6MTc0MDc2NzI3M30.L7vYnGRXLvPBa320J0BiIiQdaj2b7T84TW9lH5RkOZQ"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Logout Device",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "http://localhost:8000/api/auth/logoutDevice",
+              "path": ["api", "auth", "logoutDevice"],
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000"
+            }
+          }
+        },
+        {
+          "name": "Logout All Devices",
+          "request": {
+            "method": "GET"
+          }
+        }
+      ]
+    },
+    {
+      "name": "App",
+      "item": []
+    }
+  ]
+}
