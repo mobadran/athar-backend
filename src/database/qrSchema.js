@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const qrSchema = new mongoose.Schema({
-  // qr: { type: String, required: true },
+  text: { type: String, required: true },
   enabled:
   {
     type: Boolean,

@@ -6,7 +6,7 @@ const uri = 'mongodb://127.0.0.1:27017/Athar';
 async function main() {
   await mongoose.connect(uri);
 
-  console.log('Connected to database:', uri);
+  console.info('Connected to database:', uri);
 
   //          Log all collections and documents in the database
   // const collections = await mongoose.connection.db.listCollections().toArray();

@@ -8,7 +8,7 @@ import appRouter, { updateQrCodes } from './routers/appRouter.js';
 import businessRouter from './routers/businessRouter.js';
 import auth from './middleware/auth.js';
 
-// Connect to database
+//* Connect to database
 import db from './database/db.js';
 db();
 
@@ -30,6 +30,6 @@ app.use('/api/business', businessRouter);
 app.use('/uploads', express.static('uploads'));
 
 app.listen(PORT, () => {
-  console.log(`Server has started on: http://localhost:${PORT}`);
+  console.info(`Server has started on: http://localhost:${PORT}`);
   updateQrCodes();
 });
