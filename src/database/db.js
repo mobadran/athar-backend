@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 // import User from './userSchema.js';
 
-const uri = 'mongodb://127.0.0.1:27017/Athar';
+const uri = process.env.MONGO_DB || 'mongodb://127.0.0.1:27017/Athar';
 
 async function main() {
   await mongoose.connect(uri);
