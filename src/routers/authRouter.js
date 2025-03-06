@@ -1,9 +1,9 @@
-import express from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import User from '../database/userSchema.js';
-import fs from 'fs';
-import path from 'path';
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../database/userSchema.js');
+const fs = require('fs');
+const path = require('path');
 const router = express.Router();
 
 //* Register Endpoint
@@ -56,7 +56,8 @@ router.post('/login', async (req, res) => {
     res.cookie('refreshToken', refreshToken, {
       maxAge: 1 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      secure: true
+      secure: true,
+      sameSite: 'none',
     }).json({ accessToken });
   } catch (err) {
     console.error(err);
@@ -88,7 +89,7 @@ router.delete('/deleteAccount', async (req, res) => {
     const refreshToken = req.cookies.refreshToken;
     const { phone, password } = req.query;
 
-    //* If no refresh token provided, send 401 (Unauthorized)
+    //* If no refresh token, phone number, or password provided, send 401 (Unauthorized)
     if (!refreshToken || !phone || !password) return res.status(401).json({ message: 'No refresh token, phone number, or password provided' });
 
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, decoded) => {
@@ -117,9 +118,12 @@ router.delete('/deleteAccount', async (req, res) => {
         fs.unlinkSync(imgPath);
       }
 
-      res.clearCookie('refreshToken').sendStatus(204);
+      return res.clearCookie('refreshToken', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+      }).sendStatus(204);
     });
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
@@ -160,4 +164,4 @@ function createAccessToken(userId) {
   return jwt.sign({ userId, role: "User" }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 }
 
-export default router;
+module.exports = router;

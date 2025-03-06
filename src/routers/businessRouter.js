@@ -1,6 +1,6 @@
-import express from 'express';
-import Qr from '../database/qrSchema.js';
-import Business from '../database/businessSchema.js';
+const express = require('express');
+const Qr = require('../database/qrSchema.js');
+const Business = require('../database/businessSchema.js');
 const router = express.Router();
 
 let clients = [];
@@ -24,8 +24,8 @@ router.get('/qrCode', authenticateBusiness, async (req, res) => {
     // const qrCodesArray = qrCodes.map(qr => qr._id);
     // return res.status(200).json({ qrCodesArray });
     //* Send only the first qr code to the business
-    const qrCode = await Qr.findOne({ enabled: true }, { text: 1 });
-    return res.status(200).json({ text: qrCode.text });
+    const text = await getQrCode();
+    return res.status(200).json({ text });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });
@@ -39,7 +39,8 @@ router.get('/eventStream', async (req, res) => {
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
     res.flushHeaders();
-    res.write('data: Connected\n\n');
+    const text = await getQrCode();
+    res.write(`data: ${text}\n\n`);
 
     clients.push(res);
 
@@ -82,11 +83,17 @@ async function authenticateBusiness(req, res, next) {
   next();
 }
 
+async function getQrCode() {
+  const qrCode = await Qr.findOne({ enabled: true }, { text: 1 });
+  return qrCode.text;
+}
+
 function sendEvent(message) {
   clients.forEach(res => {
     res.write(`data: ${message}\n\n`);
   });
 }
 
-export default router;
-export { sendEvent };
+module.exports = router;
+
+module.exports.sendEvent = sendEvent;

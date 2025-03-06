@@ -1,10 +1,10 @@
-import express from 'express';
-import multer from 'multer';
-import Qr from '../database/qrSchema.js';
-import User from '../database/userSchema.js';
-import fs from 'fs';
-import path from 'path';
-import { sendEvent } from './businessRouter.js';
+const express = require('express');
+const multer = require('multer');
+const Qr = require('../database/qrSchema.js');
+const User = require('../database/userSchema.js');
+const fs = require('fs');
+const path = require('path');
+const { sendEvent } = require('./businessRouter.js');
 const router = express.Router();
 
 //* Multer configuration
@@ -157,6 +157,6 @@ router.put('/updateImg', uploadAvatar.single('image'), async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
 
-export { updateQrCodes };
+module.exports.updateQrCodes = updateQrCodes;
